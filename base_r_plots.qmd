@@ -1,0 +1,49 @@
+---
+title: Base R Plots
+date: 2024-06-02
+format: html
+---
+
+```{r}
+# Generate some sample data
+set.seed(123)
+x <- rnorm(100)
+y <- rnorm(100)
+summary(x)
+summary(y)
+```
+```{r}
+# Basic scatter plot
+plot(x, y, main = "Scatter Plot", xlab = "X-axis", ylab = "Y-axis")
+
+# Histogram
+hist(x, main = "Histogram", xlab = "X-axis", breaks = 10, col = "blue")
+
+# Boxplot
+boxplot(x, main = "Boxplot", ylab = "Values")
+
+# Barplot
+barplot(table(round(x)), main = "Bar Plot", xlab = "Values", col = "green")
+
+# Pie chart
+pie(table(round(x)), main = "Pie Chart")
+
+# Density plot
+plot(density(x), main = "Density Plot", xlab = "Values")
+
+# Pairs plot
+pairs(~x + y, main = "Pairs Plot")
+
+# Image plot
+matrix_data <- matrix(rnorm(100), nrow = 10)
+image(matrix_data, main = "Image Plot")
+
+# Contour plot
+contour(volcano, main = "Contour Plot")
+# 3D perspective plot
+persp(volcano, main = "3D Perspective Plot")
+
+# QQ plot
+qqnorm(x)
+qqline(x, col = "red")
+```

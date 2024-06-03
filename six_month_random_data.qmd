@@ -1,0 +1,84 @@
+---
+title: "Base R: Random Data Analysis"
+author: "David  Jackson"
+date: "2024-06-01"
+format: 
+ html:
+    fig-width: 32
+    fig-height: 24
+    code-fold: true
+---
+
+
+```{r}
+library(lubridate)
+```
+# Set the start and end dates
+```{r}
+end_date <- Sys.Date()
+start_date <- end_date - months(6)
+
+# Generate a sequence of dates for the past six months
+dates <- seq(from = start_date, to = end_date, by = "day")
+
+# Remove weekends from the date sequence
+dates <- dates[!weekdays(dates) %in% c("Saturday", "Sunday")]
+
+# Generate random values for volume and closing prices
+set.seed(123)  # Set seed for reproducibility
+volume <- round(runif(length(dates), min = 100000, max = 500000))
+closing_prices <- round(runif(length(dates), min = 100, max = 500), 2)
+
+# Combine the dates, volume, and closing prices into a data frame
+stock_data <- data.frame(Date = dates, Volume = volume, Closing_Price = closing_prices)
+
+# Display the first few rows of the data frame
+head(stock_data)
+```
+```{r}
+# Perform linear regression for Volume
+lm_volume <- lm(Volume ~ Date, data = stock_data)
+summary(lm_volume)
+```
+```{r}
+# Perform linear regression for Closing_Price
+lm_closing_price <- lm(Closing_Price ~ Date, data = stock_data)
+summary(lm_closing_price)
+```
+# Plot the closing prices over time
+
+```{r}
+# Plot Closing Price over time and add the regression line
+plot(stock_data$Date, stock_data$Closing_Price, type = "b", 
+     main = "Random Stock Data", lwd = 2, cex = 1, 
+     xlab = "Date", ylab = "Closing Price", col = "blue",cex.main=5,cex.lab=3)
+
+# Add the regression line
+abline(lm_closing_price, col = "red", lwd = 2)
+
+# Add a legend for the regression line
+legend("topright", legend = "Regression Line", col = "red", lwd = 2, cex = 3)
+
+```
+
+```{r}
+hist(stock_data$Closing_Price, main = "Histogram", xlab = "X-axis", breaks = 10, col = "blue")
+```
+```{r}
+boxplot(stock_data$Closing_Price, main = "Histogram", xlab = "X-axis", breaks = 10, col = "blue")
+```
+# Optionally, you can also plot the volume over time
+```{r}
+plot(stock_data$Date, stock_data$Volume, type = "b", 
+     main = "Random Stock Volume Data", lwd = 4, cex = 2,cex.main=5,cex.lab=3,
+     xlab = "Date", ylab = "Volume", col = "red")
+     abline(lm_volume, col = "blue", lwd = 4)
+     legend("topright", legend = "Regression Line", col = "blue", lwd = 4,cex=3)
+```
+
+```{r}
+hist(stock_data$Volume, main = "Histogram", xlab = "X-axis", breaks = 10, col = "blue")
+```
+```{r}
+boxplot(stock_data$Volume, main = "Histogram", xlab = "X-axis", breaks = 10, col = "blue")
+```
