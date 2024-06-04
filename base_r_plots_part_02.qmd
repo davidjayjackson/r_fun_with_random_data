@@ -1,0 +1,52 @@
+---
+title: "Plotting wth Base R"
+author: "David  Jackson"
+date: "2024-06-01"
+format: 
+  html:
+    fig-width: 8
+    fig-height: 4
+    code-fold: true
+---
+
+# Sample data
+
+```{r}
+x <- c(1, 2, 3, 4, 5)
+y <- c(2, 4, 6, 8, 10)
+```
+
+# Points
+```{r}
+plot(x, y, type = "p", main = "Points",cex=2)
+```
+# Lines
+```{r}
+plot(x, y, type = "l", main = "Lines",lwd=2)
+```
+# Both points and lines
+
+```{r}
+plot(x, y, type = "b", main = "Both points and lines",lwd=2,cex=2)
+```
+
+# Both points and lines (overlapping points and lines)
+```{r}
+plot(x, y, type = "o", main = "Overlapping points and lines",lwd=2,cex=2)
+```
+# Histogram-like vertical lines
+```{r}
+plot(x, y, type = "h", main ="Histogram-like vertical lines",cex=5)
+
+# Stair steps
+```{r}
+plot(x, y, type = "s", main = "Stair steps",cex=2)
+```
+# Other stair steps (starts from the top left corner)
+```{r}
+plot(x, y, type = "S", main = "Other stair steps",cex=2)
+```
+# No plotting
+```{r}
+plot(x, y, type = "n", main = "No plotting")
+```
